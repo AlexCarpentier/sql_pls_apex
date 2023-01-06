@@ -58,6 +58,26 @@ AS
   
   
   
+  PROCEDURE Set_Parameter (
+     p_v_parameter_name IN VARCHAR2
+    ,p_v_value IN VARCHAR2
+  )
+  IS
+  BEGIN
+    
+    G_TAB_MESSAGES(G_TAB_MESSAGES.Last) := replace (
+                                              G_TAB_MESSAGES(G_TAB_MESSAGES.Last)     --dernier message de la pile
+                                             ,CHR(124) || p_v_parameter_name || CHR(124)  --Nom du paramètre
+                                             ,p_v_value  --Valeur remplacante
+                                           );
+    
+  END Set_Parameter;
+  
+  
+  
+  
+  
+  
   FUNCTION Get (
      p_n_message_index IN NUMBER
   ) RETURN VARCHAR2

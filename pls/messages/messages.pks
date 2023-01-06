@@ -12,6 +12,14 @@ AS
    */
   PROCEDURE Reset;
   
+  /* Permet de remplacer un paramètre du message par une valeur
+   * est appliqué au dernier message ajouté
+   */
+  PROCEDURE Set_Parameter (
+     p_v_parameter_name IN VARCHAR2
+    ,p_v_value IN VARCHAR2
+  );
+  
   /* Renvoie le texte du message du message demandé dans la langue demandée
    */
   FUNCTION Get (
