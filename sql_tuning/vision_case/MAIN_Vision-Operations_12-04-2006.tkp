@@ -1,0 +1,815 @@
+
+TKPROF: Release 11.2.0.2.0 - Development on Mar. Mars 24 09:17:13 2015
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+Trace file: xe_ora_83256_BILAN_3.trc
+Sort options: prsqry  prscu  exeqry  execu  fchqry  fchcu  
+********************************************************************************
+count    = number of times OCI procedure was executed
+cpu      = cpu time in seconds executing 
+elapsed  = elapsed time in seconds executing
+disk     = number of physical reads of buffers from disk
+query    = number of buffers gotten for consistent read
+current  = number of buffers gotten in current mode (usually for update)
+rows     = number of rows processed by the fetch or execute call
+********************************************************************************
+
+SQL ID: 7yqy1ffcu9udz Plan Hash: 3327805724
+
+SELECT DISTINCT PO_VENDORS.VENDOR_NAME AS NOMFOURNISSEUR, 
+  PO_VENDOR_CONTACTS.PREFIX AS LEPREFIX,PO_VENDOR_CONTACTS.LAST_NAME AS LENOM,
+  PO_VENDOR_CONTACTS.FIRST_NAME AS PRENOM,PO_VENDOR_CONTACTS.PHONE AS 
+  TELEPHONE 
+FROM
+ PO_VENDORS, PO_VENDOR_CONTACTS, PO_HEADERS_ALL WHERE 
+  PO_VENDOR_CONTACTS.VENDOR_CONTACT_ID = PO_HEADERS_ALL.VENDOR_CONTACT_ID AND 
+  PO_VENDOR_CONTACTS.VENDOR_ID = PO_VENDORS.VENDOR_ID AND 
+  PO_HEADERS_ALL.SEGMENT1 = :B2 AND PO_HEADERS_ALL.ORG_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute   1518      0.37       0.28          0          0          0           0
+Fetch     1518   4047.26    4900.08    5242692  329662247          0         352
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3037   4047.64    4900.37    5242692  329662247          0         352
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         0          0          0  HASH UNIQUE (cr=1370 pr=0 pw=0 time=4726 us cost=9593 size=190 card=1)
+         0          0          0   NESTED LOOPS  (cr=1370 pr=0 pw=0 time=4675 us cost=9592 size=190 card=1)
+         0          0          0    HASH JOIN  (cr=1370 pr=0 pw=0 time=4672 us cost=9592 size=185 card=1)
+         0          0          0     MERGE JOIN CARTESIAN (cr=1370 pr=0 pw=0 time=4539 us cost=392 size=861 card=21)
+         0          0          0      TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4536 us cost=383 size=12 card=1)
+         0          0          0      BUFFER SORT (cr=0 pr=0 pw=0 time=0 us cost=9 size=12354 card=426)
+         0          0          0       TABLE ACCESS FULL AP_SUPPLIERS (cr=0 pr=0 pw=0 time=0 us cost=9 size=12354 card=426)
+         0          0          0     VIEW  PO_VENDOR_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=9199 size=126000 card=875)
+         0          0          0      SORT UNIQUE (cr=0 pr=0 pw=0 time=0 us cost=9199 size=183764 card=875)
+         0          0          0       UNION-ALL  (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0        TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=2 size=9 card=1)
+         0          0          0         INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=1 size=0 card=1)(object id 21483)
+         0          0          0        TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=2 size=9 card=1)
+         0          0          0         INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=1 size=0 card=1)(object id 21483)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=101 size=35 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=5086 size=183540 card=874)
+         0          0          0         HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=991 size=129675 card=665)
+         0          0          0          TABLE ACCESS FULL AP_SUPPLIERS (cr=0 pr=0 pw=0 time=0 us cost=9 size=6165 card=411)
+         0          0          0          HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=982 size=119880 card=666)
+         0          0          0           HASH JOIN OUTER (cr=0 pr=0 pw=0 time=0 us cost=577 size=98637 card=671)
+         0          0          0            HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=539 size=93940 card=671)
+         0          0          0             HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=134 size=87204 card=676)
+         0          0          0              HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=33 size=82960 card=680)
+         0          0          0               TABLE ACCESS FULL AP_SUPPLIER_SITES_ALL (cr=0 pr=0 pw=0 time=0 us cost=26 size=16978 card=1306)
+         0          0          0               TABLE ACCESS FULL AP_SUPPLIER_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=6 size=63002 card=578)
+         0          0          0              TABLE ACCESS FULL HZ_PARTY_SITES (cr=0 pr=0 pw=0 time=0 us cost=101 size=111496 card=15928)
+         0          0          0             TABLE ACCESS FULL HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=403 size=449174 card=40834)
+         0          0          0            TABLE ACCESS FULL HZ_ORG_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=38 size=40929 card=5847)
+         0          0          0           TABLE ACCESS FULL HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=404 size=1347522 card=40834)
+         0          0          0         TABLE ACCESS FULL HZ_RELATIONSHIPS (cr=0 pr=0 pw=0 time=0 us cost=4093 size=3193605 card=212907)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=101 size=35 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        NESTED LOOPS  (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         NESTED LOOPS  (cr=0 pr=0 pw=0 time=0 us cost=4111 size=224 card=1)
+         0          0          0          NESTED LOOPS  (cr=0 pr=0 pw=0 time=0 us cost=4110 size=209 card=1)
+         0          0          0           NESTED LOOPS OUTER (cr=0 pr=0 pw=0 time=0 us cost=4109 size=176 card=1)
+         0          0          0            HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=4108 size=169 card=1)
+         0          0          0             HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=4099 size=149 card=1)
+         0          0          0              TABLE ACCESS FULL AP_SUPPLIER_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=6 size=109 card=1)
+         0          0          0              TABLE ACCESS FULL HZ_RELATIONSHIPS (cr=0 pr=0 pw=0 time=0 us cost=4092 size=1760 card=44)
+         0          0          0             TABLE ACCESS FULL AP_SUPPLIERS (cr=0 pr=0 pw=0 time=0 us cost=9 size=8220 card=411)
+         0          0          0            TABLE ACCESS BY INDEX ROWID HZ_ORG_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=1 size=7 card=1)
+         0          0          0             INDEX UNIQUE SCAN HZ_ORG_CONTACTS_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=0 card=1)(object id 21490)
+         0          0          0           TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=1 size=33 card=1)
+         0          0          0            INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=0 card=1)(object id 21483)
+         0          0          0          INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=0 card=1)(object id 21483)
+         0          0          0         TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=1 size=15 card=1)
+         0          0          0    INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=5 card=1)(object id 21483)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  asynch descriptor resize                     3520        0.00          0.02
+  direct path read                            33973        1.76        701.42
+  resmgr:cpu quantum                             17        1.07          1.65
+  db file sequential read                         4        0.01          0.03
+********************************************************************************
+
+SQL ID: f71k9cujf73y9 Plan Hash: 3954474134
+
+SELECT SUM(PO_VENDOR_CONTACTS.VENDOR_CONTACT_ID) 
+FROM
+ PO_VENDORS, PO_VENDOR_CONTACTS, PO_HEADERS_ALL WHERE 
+  PO_VENDOR_CONTACTS.VENDOR_CONTACT_ID = PO_HEADERS_ALL.VENDOR_CONTACT_ID AND 
+  PO_VENDOR_CONTACTS.VENDOR_ID = PO_VENDORS.VENDOR_ID AND 
+  PO_HEADERS_ALL.SEGMENT1 = :B2 AND PO_HEADERS_ALL.ORG_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.01       0.00          0          0          0           0
+Execute   1518      0.35       1.72          0          0          0           0
+Fetch     1518   4038.96    4895.63    5242688  329661460          0        1518
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3037   4039.34    4897.36    5242688  329661460          0        1518
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  SORT AGGREGATE (cr=1370 pr=0 pw=0 time=4754 us)
+         0          0          0   NESTED LOOPS  (cr=1370 pr=0 pw=0 time=4743 us cost=9592 size=53 card=1)
+         0          0          0    HASH JOIN  (cr=1370 pr=0 pw=0 time=4739 us cost=9592 size=48 card=1)
+         0          0          0     MERGE JOIN CARTESIAN (cr=1370 pr=0 pw=0 time=4579 us cost=392 size=462 card=21)
+         0          0          0      TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4575 us cost=383 size=12 card=1)
+         0          0          0      BUFFER SORT (cr=0 pr=0 pw=0 time=0 us cost=9 size=4260 card=426)
+         0          0          0       TABLE ACCESS FULL AP_SUPPLIERS (cr=0 pr=0 pw=0 time=0 us cost=9 size=4260 card=426)
+         0          0          0     VIEW  PO_VENDOR_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=9199 size=22750 card=875)
+         0          0          0      SORT UNIQUE (cr=0 pr=0 pw=0 time=0 us cost=9199 size=183764 card=875)
+         0          0          0       UNION-ALL  (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0        TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=2 size=9 card=1)
+         0          0          0         INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=1 size=0 card=1)(object id 21483)
+         0          0          0        TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=2 size=9 card=1)
+         0          0          0         INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=1 size=0 card=1)(object id 21483)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=101 size=35 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=5086 size=183540 card=874)
+         0          0          0         HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=991 size=129675 card=665)
+         0          0          0          TABLE ACCESS FULL AP_SUPPLIERS (cr=0 pr=0 pw=0 time=0 us cost=9 size=6165 card=411)
+         0          0          0          HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=982 size=119880 card=666)
+         0          0          0           HASH JOIN OUTER (cr=0 pr=0 pw=0 time=0 us cost=577 size=98637 card=671)
+         0          0          0            HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=539 size=93940 card=671)
+         0          0          0             HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=134 size=87204 card=676)
+         0          0          0              HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=33 size=82960 card=680)
+         0          0          0               TABLE ACCESS FULL AP_SUPPLIER_SITES_ALL (cr=0 pr=0 pw=0 time=0 us cost=26 size=16978 card=1306)
+         0          0          0               TABLE ACCESS FULL AP_SUPPLIER_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=6 size=63002 card=578)
+         0          0          0              TABLE ACCESS FULL HZ_PARTY_SITES (cr=0 pr=0 pw=0 time=0 us cost=101 size=111496 card=15928)
+         0          0          0             TABLE ACCESS FULL HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=403 size=449174 card=40834)
+         0          0          0            TABLE ACCESS FULL HZ_ORG_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=38 size=40929 card=5847)
+         0          0          0           TABLE ACCESS FULL HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=404 size=1347522 card=40834)
+         0          0          0         TABLE ACCESS FULL HZ_RELATIONSHIPS (cr=0 pr=0 pw=0 time=0 us cost=4093 size=3193605 card=212907)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=101 size=35 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=29 card=1)
+         0          0          0        COUNT STOPKEY (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         TABLE ACCESS FULL HZ_CONTACT_POINTS (cr=0 pr=0 pw=0 time=0 us cost=102 size=31 card=1)
+         0          0          0        NESTED LOOPS  (cr=0 pr=0 pw=0 time=0 us)
+         0          0          0         NESTED LOOPS  (cr=0 pr=0 pw=0 time=0 us cost=4111 size=224 card=1)
+         0          0          0          NESTED LOOPS  (cr=0 pr=0 pw=0 time=0 us cost=4110 size=209 card=1)
+         0          0          0           NESTED LOOPS OUTER (cr=0 pr=0 pw=0 time=0 us cost=4109 size=176 card=1)
+         0          0          0            HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=4108 size=169 card=1)
+         0          0          0             HASH JOIN  (cr=0 pr=0 pw=0 time=0 us cost=4099 size=149 card=1)
+         0          0          0              TABLE ACCESS FULL AP_SUPPLIER_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=6 size=109 card=1)
+         0          0          0              TABLE ACCESS FULL HZ_RELATIONSHIPS (cr=0 pr=0 pw=0 time=0 us cost=4092 size=1760 card=44)
+         0          0          0             TABLE ACCESS FULL AP_SUPPLIERS (cr=0 pr=0 pw=0 time=0 us cost=9 size=8220 card=411)
+         0          0          0            TABLE ACCESS BY INDEX ROWID HZ_ORG_CONTACTS (cr=0 pr=0 pw=0 time=0 us cost=1 size=7 card=1)
+         0          0          0             INDEX UNIQUE SCAN HZ_ORG_CONTACTS_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=0 card=1)(object id 21490)
+         0          0          0           TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=1 size=33 card=1)
+         0          0          0            INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=0 card=1)(object id 21483)
+         0          0          0          INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=0 card=1)(object id 21483)
+         0          0          0         TABLE ACCESS BY INDEX ROWID HZ_PARTIES (cr=0 pr=0 pw=0 time=0 us cost=1 size=15 card=1)
+         0          0          0    INDEX UNIQUE SCAN HZ_PARTIES_PK (cr=0 pr=0 pw=0 time=0 us cost=0 size=5 card=1)(object id 21483)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  asynch descriptor resize                     3168        0.00          0.02
+  direct path read                            34902        1.48        710.85
+  resmgr:cpu quantum                             12        1.32          1.45
+********************************************************************************
+
+SQL ID: 43k8ra9anbn39 Plan Hash: 1339111510
+
+SELECT INVOICE_NUM AS FACTURE, PO_HEADERS_ALL.SEGMENT1 AS NUMCOMMANDE,
+  AP_INVOICES_ALL.INVOICE_ID 
+FROM
+ AP_INVOICE_DISTRIBUTIONS_ALL,AP_INVOICES_ALL,PO_DISTRIBUTIONS_ALL,
+  PO_HEADERS_ALL WHERE AP_INVOICES_ALL.INVOICE_ID = 
+  AP_INVOICE_DISTRIBUTIONS_ALL.INVOICE_ID AND 
+  AP_INVOICE_DISTRIBUTIONS_ALL.PO_DISTRIBUTION_ID = 
+  PO_DISTRIBUTIONS_ALL.PO_DISTRIBUTION_ID AND 
+  PO_DISTRIBUTIONS_ALL.PO_HEADER_ID = PO_HEADERS_ALL.PO_HEADER_ID AND 
+  PO_HEADERS_ALL.SEGMENT1 = :B2 AND PO_HEADERS_ALL.ORG_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute   1518      0.14       0.99          0          0          0           0
+Fetch     1519    989.03    8895.04   91948966   94046192          0        4104
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3038    989.17    8896.03   91948966   94046192          0        4104
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  NESTED LOOPS  (cr=61952 pr=60572 pw=0 time=6237197 us)
+         1          1          1   NESTED LOOPS  (cr=61951 pr=60572 pw=0 time=6237181 us cost=16967 size=988 card=19)
+         1          1          1    HASH JOIN  (cr=61949 pr=60572 pw=0 time=6237143 us cost=16965 size=32 card=1)
+    302343     302343     302343     MERGE JOIN CARTESIAN (cr=54396 pr=53022 pw=0 time=5410231 us cost=14877 size=648054 card=29457)
+         1          1          1      TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4783 us cost=383 size=14 card=1)
+    302343     302343     302343      BUFFER SORT (cr=53026 pr=53022 pw=0 time=5278262 us cost=14494 size=2418744 card=302343)
+    302343     302343     302343       TABLE ACCESS FULL AP_INVOICE_DISTRIBUTIONS_ALL (cr=53026 pr=53022 pw=0 time=12983062 us cost=14494 size=2418744 card=302343)
+    223831     223831     223831     TABLE ACCESS FULL PO_DISTRIBUTIONS_ALL (cr=7553 pr=7550 pw=0 time=77387 us cost=2086 size=2238310 card=223831)
+         1          1          1    INDEX RANGE SCAN AIA_INVOICE_ID (cr=2 pr=0 pw=0 time=33 us cost=1 size=0 card=17)(object id 21912)
+         1          1          1   TABLE ACCESS BY INDEX ROWID AP_INVOICES_ALL (cr=1 pr=0 pw=0 time=9 us cost=2 size=340 card=17)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  direct path read                           731881        2.20       7589.52
+  asynch descriptor resize                     4554        0.00          0.01
+  resmgr:cpu quantum                             11        1.18          3.12
+  db file sequential read                       670        1.79         20.59
+********************************************************************************
+
+SQL ID: 8uw2ajm8yyryg Plan Hash: 2516026195
+
+SELECT PO_HEADERS_ALL.SEGMENT1 AS NUMCOMMANDE,ITEM_DESCRIPTION , 
+  (((PO_LINES_ALL.UNIT_PRICE) * (QUANTITY))) TEST 
+FROM
+ PO_LINES_ALL,PO_HEADERS_ALL WHERE PO_LINES_ALL.PO_HEADER_ID = 
+  PO_HEADERS_ALL.PO_HEADER_ID AND SEGMENT1 = :B2 AND PO_HEADERS_ALL.ORG_ID = 
+  :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute   1518      0.28       1.09          0          0          0           0
+Fetch     1518     89.17     901.37    8030220   10114790          0        2810
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3037     89.45     902.47    8030220   10114790          0        2810
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  HASH JOIN  (cr=6663 pr=5290 pw=0 time=458297 us cost=1849 size=55 card=1)
+         1          1          1   TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4394 us cost=383 size=14 card=1)
+    118910     118910     118910   TABLE ACCESS FULL PO_LINES_ALL (cr=5293 pr=5290 pw=0 time=65944 us cost=1465 size=4875310 card=118910)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  direct path read                            74629        2.15        782.16
+  asynch descriptor resize                     3036        0.00          0.00
+********************************************************************************
+
+SQL ID: fw9r1hfxmj592 Plan Hash: 3084265092
+
+SELECT SUM(PO_LINES_ALL.UNIT_PRICE * QUANTITY) 
+FROM
+ PO_LINES_ALL,PO_HEADERS_ALL WHERE PO_LINES_ALL.PO_HEADER_ID = 
+  PO_HEADERS_ALL.PO_HEADER_ID AND SEGMENT1 = :B2 AND PO_HEADERS_ALL.ORG_ID = 
+  :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute   1518      0.21       0.20          0          0          0           0
+Fetch     1518     89.26     828.72    8030220   10114434          0        1518
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3037     89.48     828.93    8030220   10114434          0        1518
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  SORT AGGREGATE (cr=6663 pr=5290 pw=0 time=419116 us)
+         1          1          1   HASH JOIN  (cr=6663 pr=5290 pw=0 time=419030 us cost=1849 size=27 card=1)
+         1          1          1    TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4454 us cost=383 size=14 card=1)
+    118910     118910     118910    TABLE ACCESS FULL PO_LINES_ALL (cr=5293 pr=5290 pw=0 time=55037 us cost=1465 size=1545830 card=118910)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  direct path read                            74701        1.62        706.64
+  asynch descriptor resize                     3036        0.00          0.00
+********************************************************************************
+
+SQL ID: 5b4hbvu332myw Plan Hash: 3303470407
+
+SELECT CURRENCY_CODE 
+FROM
+ PO_HEADERS_ALL WHERE ORG_ID=:B2 AND SEGMENT1=:B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        2      0.00       0.00          0          0          0           0
+Execute   4328      0.45       1.91          0          0          0           0
+Fetch     4328     19.20      20.57          0    5929364          0        4328
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     8658     19.65      22.48          0    5929364          0        4328
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 2
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4377 us cost=383 size=13 card=1)
+
+********************************************************************************
+
+SQL ID: 74yr706hr21vk Plan Hash: 3622065430
+
+SELECT DISTINCT FULL_NAME 
+FROM
+ PO_HEADERS_ALL, PO_AGENTS,PER_ALL_PEOPLE_F WHERE PO_AGENTS.AGENT_ID = 
+  PER_ALL_PEOPLE_F.PERSON_ID AND PO_AGENTS.AGENT_ID = PO_HEADERS_ALL.AGENT_ID 
+  AND SEGMENT1 = :B2 AND PO_HEADERS_ALL.ORG_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute   1518      0.23       0.19          0          0          0           0
+Fetch     1518      7.71       8.34         15    2089365          0        1519
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3037      7.95       8.54         15    2089365          0        1519
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  HASH UNIQUE (cr=1376 pr=0 pw=0 time=5248 us cost=390 size=45 card=1)
+         1          1          1   NESTED LOOPS  (cr=1376 pr=0 pw=0 time=5006 us)
+         1          1          1    NESTED LOOPS  (cr=1375 pr=0 pw=0 time=4993 us cost=389 size=45 card=1)
+         1          1          1     HASH JOIN  (cr=1373 pr=0 pw=0 time=4971 us cost=386 size=18 card=1)
+         1          1          1      TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4478 us cost=383 size=13 card=1)
+       242        242        242      TABLE ACCESS FULL PO_AGENTS (cr=3 pr=0 pw=0 time=161 us cost=3 size=1210 card=242)
+         1          1          1     INDEX RANGE SCAN PER_PEOPLE_F_PK (cr=2 pr=0 pw=0 time=18 us cost=1 size=0 card=2)(object id 21478)
+         1          1          1    TABLE ACCESS BY INDEX ROWID PER_ALL_PEOPLE_F (cr=1 pr=0 pw=0 time=6 us cost=3 size=54 card=2)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  asynch descriptor resize                     3036        0.00          0.01
+  db file sequential read                        15        0.11          0.20
+********************************************************************************
+
+SQL ID: gd87brpm4kjmh Plan Hash: 2949989385
+
+SELECT COUNT(CLOSED_DATE) 
+FROM
+ PO_HEADERS_ALL,HR_ALL_ORGANIZATION_UNITS WHERE 
+  HR_ALL_ORGANIZATION_UNITS.ORGANIZATION_ID = PO_HEADERS_ALL.ORG_ID AND 
+  TRUNC(CLOSED_DATE) = TRUNC(:B2 ) AND ORG_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        2      0.00       0.00          0          0          0           0
+Execute   1519      0.18       0.83          0          0          0           0
+Fetch     1519     24.03      24.69          0    2084071          0        1519
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3040     24.21      25.53          0    2084071          0        1519
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 2
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  SORT AGGREGATE (cr=1372 pr=0 pw=0 time=16878 us)
+      1518       1518       1518   HASH JOIN  (cr=1372 pr=0 pw=0 time=6235 us cost=385 size=112 card=7)
+         1          1          1    INDEX UNIQUE SCAN HR_ORGANIZATION_UNITS_PK (cr=2 pr=0 pw=0 time=13 us cost=1 size=4 card=1)(object id 21472)
+      1518       1518       1518    TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=3901 us cost=383 size=84 card=7)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  asynch descriptor resize                     1519        0.00          0.01
+********************************************************************************
+
+SQL ID: fu960hngrbbbm Plan Hash: 3303470407
+
+SELECT CLOSED_CODE 
+FROM
+ PO_HEADERS_ALL WHERE SEGMENT1 = :B2 AND ORG_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute   1518      0.14       1.22          0          0          0           0
+Fetch     1518      6.92       7.17          0    2079675          0        1518
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3037      7.06       8.40          0    2079675          0        1518
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  TABLE ACCESS FULL PO_HEADERS_ALL (cr=1370 pr=0 pw=0 time=4344 us cost=383 size=18 card=1)
+
+********************************************************************************
+
+SQL ID: 1vsqw7nfx8fmk Plan Hash: 2716573788
+
+SELECT NAME 
+FROM
+ HR_ALL_ORGANIZATION_UNITS WHERE ORGANIZATION_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute   1518      0.14       0.17          0          0          0           0
+Fetch     1518      0.03       0.05          0       4554          0        1518
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     3037      0.17       0.22          0       4554          0        1518
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  TABLE ACCESS BY INDEX ROWID HR_ALL_ORGANIZATION_UNITS (cr=3 pr=0 pw=0 time=33 us cost=2 size=24 card=1)
+         1          1          1   INDEX UNIQUE SCAN HR_ORGANIZATION_UNITS_PK (cr=2 pr=0 pw=0 time=16 us cost=1 size=0 card=1)(object id 21472)
+
+********************************************************************************
+
+SQL ID: 26wpm5y9yjy27 Plan Hash: 1413062262
+
+SELECT ORG_ID, HR_ALL_ORGANIZATION_UNITS.NAME,SEGMENT1,CLOSED_DATE , 
+  PO_HEADERS_ALL.PO_HEADER_ID 
+FROM
+ PO_HEADERS_ALL,HR_ALL_ORGANIZATION_UNITS WHERE 
+  HR_ALL_ORGANIZATION_UNITS.ORGANIZATION_ID = PO_HEADERS_ALL.ORG_ID AND 
+  TRUNC(CLOSED_DATE) = TRUNC(:B2 ) AND ORG_ID = :B1 
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute      1      0.00       0.00          0          0          0           0
+Fetch     1519      0.10       0.14          0       2850          0        1518
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total     1521      0.10       0.14          0       2850          0        1518
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65     (recursive depth: 1)
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+      1518       1518       1518  HASH JOIN  (cr=2850 pr=0 pw=0 time=62037 us cost=386 size=322 card=7)
+         1          1          1   TABLE ACCESS BY INDEX ROWID HR_ALL_ORGANIZATION_UNITS (cr=3 pr=0 pw=0 time=33 us cost=2 size=24 card=1)
+         1          1          1    INDEX UNIQUE SCAN HR_ORGANIZATION_UNITS_PK (cr=2 pr=0 pw=0 time=14 us cost=1 size=0 card=1)(object id 21472)
+      1518       1518       1518   TABLE ACCESS FULL PO_HEADERS_ALL (cr=2847 pr=0 pw=0 time=53973 us cost=383 size=154 card=7)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  asynch descriptor resize                        1        0.00          0.00
+********************************************************************************
+
+SQL ID: 0ncpd061ggvfg Plan Hash: 0
+
+ALTER SESSION SET sql_trace = FALSE
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute      1      0.00       0.00          0          0          0           0
+Fetch        0      0.00       0.00          0          0          0           0
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        2      0.00       0.00          0          0          0           0
+
+Misses in library cache during parse: 1
+Optimizer mode: ALL_ROWS
+Parsing user id: 65  
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  SQL*Net message to client                       1        0.00          0.00
+  SQL*Net message from client                     1        0.00          0.00
+********************************************************************************
+
+SQL ID: 729h3vvsq0raq Plan Hash: 1388734953
+
+select to_char(9,'9C') 
+from
+ dual
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        3      0.00       0.00          0          0          0           0
+Execute      3      0.00       0.00          0          0          0           0
+Fetch        3      0.00       0.00          0          0          0           3
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        9      0.00       0.00          0          0          0           3
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65  
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  FAST DUAL  (cr=0 pr=0 pw=0 time=2 us cost=2 size=0 card=1)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  SQL*Net message to client                       3        0.00          0.00
+  SQL*Net message from client                     3        0.01          0.01
+********************************************************************************
+
+SQL ID: 3y51qbk9z7gzj Plan Hash: 1805486652
+
+select VALUE 
+from
+ nls_session_parameters where PARAMETER='NLS_CURRENCY'
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        3      0.00       0.00          0          0          0           0
+Execute      3      0.00       0.00          0          0          0           0
+Fetch        3      0.00       0.00          0          0          0           3
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        9      0.00       0.00          0          0          0           3
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65  
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  FIXED TABLE FULL X$NLS_PARAMETERS (cr=0 pr=0 pw=0 time=46 us cost=0 size=81 card=1)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  SQL*Net message to client                       3        0.00          0.00
+  SQL*Net message from client                     3        0.00          0.00
+********************************************************************************
+
+SQL ID: 1pm82trkd9aqb Plan Hash: 1805486652
+
+select VALUE 
+from
+ nls_session_parameters where PARAMETER='NLS_DATE_FORMAT'
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        3      0.00       0.00          0          0          0           0
+Execute      3      0.00       0.00          0          0          0           0
+Fetch        3      0.00       0.00          0          0          0           3
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        9      0.00       0.00          0          0          0           3
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65  
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  FIXED TABLE FULL X$NLS_PARAMETERS (cr=0 pr=0 pw=0 time=26 us cost=0 size=81 card=1)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  SQL*Net message to client                       3        0.00          0.00
+  SQL*Net message from client                     3        0.00          0.00
+********************************************************************************
+
+SQL ID: cjf5yfgtsjpsr Plan Hash: 0
+
+ALTER SESSION SET sql_trace = TRUE
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute      1      0.00       0.00          0          0          0           0
+Fetch        0      0.00       0.00          0          0          0           0
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        2      0.00       0.00          0          0          0           0
+
+Misses in library cache during parse: 1
+Optimizer mode: ALL_ROWS
+Parsing user id: 65  
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  SQL*Net message to client                       1        0.00          0.00
+  SQL*Net message from client                     1        0.00          0.00
+********************************************************************************
+
+BEGIN
+  main.main(204, to_date('12/04/2006','DD/MM/YYYY'), 'mon_fichier.txt');
+END;
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute      1      5.53      10.46          0          0          0           1
+Fetch        0      0.00       0.00          0          0          0           0
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        2      5.53      10.46          0          0          0           1
+
+Misses in library cache during parse: 1
+Optimizer mode: ALL_ROWS
+Parsing user id: 65  
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  utl_file I/O                                46310        0.00          0.19
+  SQL*Net message to client                       1        0.00          0.00
+  SQL*Net message from client                     1        0.00          0.00
+********************************************************************************
+
+SQL ID: 01xvf8yh7wjxb Plan Hash: 1805486652
+
+select VALUE 
+from
+ nls_session_parameters where PARAMETER='NLS_NUMERIC_CHARACTERS'
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute      1      0.00       0.00          0          0          0           0
+Fetch        1      0.00       0.00          0          0          0           1
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        3      0.00       0.00          0          0          0           1
+
+Misses in library cache during parse: 0
+Optimizer mode: ALL_ROWS
+Parsing user id: 65  
+Number of plan statistics captured: 1
+
+Rows (1st) Rows (avg) Rows (max)  Row Source Operation
+---------- ---------- ----------  ---------------------------------------------------
+         1          1          1  FIXED TABLE FULL X$NLS_PARAMETERS (cr=0 pr=0 pw=0 time=44 us cost=0 size=81 card=1)
+
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  SQL*Net message to client                       1        0.00          0.00
+  SQL*Net message from client                     1        0.00          0.00
+********************************************************************************
+
+SQL ID: 959zc6wq090jm Plan Hash: 0
+
+ALTER SESSION SET events '10046 trace name context off'
+
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse        1      0.00       0.00          0          0          0           0
+Execute      1      0.00       0.00          0          0          0           0
+Fetch        0      0.00       0.00          0          0          0           0
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total        2      0.00       0.00          0          0          0           0
+
+Misses in library cache during parse: 0
+Parsing user id: 65  
+
+
+
+********************************************************************************
+
+OVERALL TOTALS FOR ALL NON-RECURSIVE STATEMENTS
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse       14      0.00       0.00          0          0          0           0
+Execute     14      5.53      10.46          0          0          0           1
+Fetch       10      0.00       0.00          0          0          0          10
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total       38      5.53      10.46          0          0          0          11
+
+Misses in library cache during parse: 3
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  SQL*Net message to client                   21241        0.00          0.11
+  SQL*Net message from client                 21241        2.32      42439.95
+  utl_file I/O                                46310        0.00          0.19
+  latch: shared pool                              1        0.01          0.01
+
+
+OVERALL TOTALS FOR ALL RECURSIVE STATEMENTS
+
+call     count       cpu    elapsed       disk      query    current        rows
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+Parse       13      0.01       0.00          0          0          0           0
+Execute  17992      2.53       8.65          0          0          0           0
+Fetch    19511   9311.71   20481.85  118494801  785789002          0       22222
+------- ------  -------- ---------- ---------- ---------- ----------  ----------
+total    37516   9314.26   20490.51  118494801  785789002          0       22222
+
+Misses in library cache during parse: 0
+
+Elapsed times include waiting on following events:
+  Event waited on                             Times   Max. Wait  Total Waited
+  ----------------------------------------   Waited  ----------  ------------
+  asynch descriptor resize                    21870        0.00          0.10
+  direct path read                           950086        2.20      10490.60
+  resmgr:cpu quantum                             40        1.32          6.23
+  db file sequential read                       689        1.79         20.83
+
+   21  user  SQL statements in session.
+    0  internal SQL statements in session.
+   21  SQL statements in session.
+********************************************************************************
+Trace file: xe_ora_83256_BILAN_3.trc
+Trace file compatibility: 11.1.0.7
+Sort options: prsqry  prscu  exeqry  execu  fchqry  fchcu  
+       1  session in tracefile.
+      21  user  SQL statements in trace file.
+       0  internal SQL statements in trace file.
+      21  SQL statements in trace file.
+      19  unique SQL statements in trace file.
+ 1662140  lines in trace file.
+   62957  elapsed seconds in trace file.
+
+
