@@ -35,3 +35,5 @@ values (
   ,'Le nom de famille doit être renseigné.'  --Un texte entouré de | permet de définir une variable dans votre message
   ,'E'
 );
+
+Commit;
